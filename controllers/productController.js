@@ -45,6 +45,8 @@ appStore.controller('productController', ['$scope', function($scope) {
         }
     }
 
+    $scope.itemIndex = null;
+
     $scope.addProduct = function() {
 
 
@@ -59,7 +61,11 @@ appStore.controller('productController', ['$scope', function($scope) {
             productdetails.product_totalcost = ($scope.productUnits) * ($scope.productCostPerUnit);
 
             if ($scope.purchaselist.length < 5) {
-                $scope.purchaselist.push(productdetails);
+                if ($scope.itemIndex == null) {
+                    $scope.purchaselist.push(productdetails);
+                } else {
+                    $scope.purchaselist.splice($scope.itemIndex, 1, productdetails);
+                }
             } else {
                 alert('You can add only 5 items');
             }
@@ -70,6 +76,19 @@ appStore.controller('productController', ['$scope', function($scope) {
         $scope.productName = "";
         $scope.productCostPerUnit = "";
         $scope.productUnits = "";
+    }
+
+    $scope.editProduct = function(itemNo, product) {
+        $scope.productCode = product.product_code;
+        $scope.productName = product.product_name;
+        $scope.productCostPerUnit = product.product_cost;
+        $scope.productUnits = product.product_quantity;
+        $scope.itemIndex = itemNo;
+
+    }
+
+    $scope.removeProduct = function(item) {
+        $scope.purchaselist.splice(item, 1);
     }
 
     $scope.generateBill = function() {
