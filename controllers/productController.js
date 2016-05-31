@@ -1,4 +1,5 @@
 appStore.controller('productController', ['$scope', function($scope) {
+    $scope.billFlag = false;
     $scope.productList = [
         { product_code: 'p01', product_name: 'Product01', product_cost: 200 },
         { product_code: 'p02', product_name: 'Product02', product_cost: 200 },
@@ -76,9 +77,20 @@ appStore.controller('productController', ['$scope', function($scope) {
 
     $scope.generateBill = function() {
 
-        // Calculate the total items cost and generate bill  
+        // Calculate of total items cost and bill generation 
 
-        alert('Calculate the total items cost and generate bill');
+        var totalAmount = 0;
 
+        for (var i = 0; i < $scope.purchaselist.length; i++) {
+
+            totalAmount = totalAmount + $scope.purchaselist[i].product_totalcost;
+        }
+
+        $scope.Amount = totalAmount;
+
+        alert($scope.Amount);
+
+        $scope.billFlag = true;
+        $scope.today = new Date();
     }
 }]);

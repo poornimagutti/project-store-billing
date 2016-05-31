@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="row">
+    <div class="row" ng-hide="billFlag">
         <div class="col-lg-6">
             <h2 style="text-align:center">Add Product</h2>
             <form class="form-horizontal">
@@ -58,7 +58,41 @@
                     </tr>
                 </tbody>
             </table>
-            <button class="btn btn-success" ng-if="purchaselist.length">Generate Bill</button>
+            <button class="btn btn-success" ng-if="purchaselist.length" ng-click="generateBill()">Generate Bill</button>
+        </div>
+    </div>
+    <div class="row" ng-show="billFlag">
+        <div class="col-lg-6">
+            <table class="table table-striped ">
+                <caption>Bill Details</caption>
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>PCode</th>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Unit Cost</th>
+                        <th>Total Cost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat='product in purchaselist'>
+                        <td>{{$index+1}}</td>
+                        <td>{{product.product_code}}</td>
+                        <td>{{product.product_name}}</td>
+                        <td>{{product.product_quantity}}</td>
+                        <td>{{product.product_cost}}</td>
+                        <td>{{product.product_totalcost}}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5">Total Amount:</td>
+                        <td>{{Amount | currency: '&#8377;'}}</td>
+                    </tr>
+                </tfoot>
+            </table>
+            <div>Date Created: {{today | date:'medium'}}</div>
         </div>
     </div>
 </div>
