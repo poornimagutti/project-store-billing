@@ -48,13 +48,10 @@ appStore.controller('productController', ['$scope', function($scope) {
     $scope.addProduct = function() {
 
 
-        if ($scope.productCode == " " || $scope.productName == " " || $scope.productUnits == "") {
-            alert('Please Enter some values');
+        if ($scope.productCode == null || $scope.productUnits == null) {
+            alert('Please Enter Product Code');
         } else {
             var productdetails = {};
-            if ($scope.productUnits == " ") {
-                $scope.productUnits = 1;
-            }
             productdetails.product_code = $scope.productCode;
             productdetails.product_name = $scope.productName;
             productdetails.product_cost = $scope.productCostPerUnit;
@@ -78,18 +75,11 @@ appStore.controller('productController', ['$scope', function($scope) {
     $scope.generateBill = function() {
 
         // Calculate of total items cost and bill generation 
-
         var totalAmount = 0;
-
         for (var i = 0; i < $scope.purchaselist.length; i++) {
-
             totalAmount = totalAmount + $scope.purchaselist[i].product_totalcost;
         }
-
         $scope.Amount = totalAmount;
-
-        alert($scope.Amount);
-
         $scope.billFlag = true;
         $scope.today = new Date();
     }
