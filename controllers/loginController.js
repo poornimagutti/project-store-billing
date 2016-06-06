@@ -1,6 +1,6 @@
-appStore.controller('loginController', ['$scope', '$rootScope', '$location', function($scope, $rootScope, $location) {
+appStore.controller('loginController', ['$scope', '$rootScope', '$location', '$timeout', function($scope, $rootScope, $location, $timeout) {
 
-
+    $scope.warningFlag = false;
     $scope.users = [{ username: 'sai', password: 'test@123' }, { username: 'kiran', password: 'test@123' }, { username: 'venkat', password: 'test@123' }];
 
     $scope.login = function(user) {
@@ -14,15 +14,27 @@ appStore.controller('loginController', ['$scope', '$rootScope', '$location', fun
 
                 } else {
                     if (i == $scope.users.length - 1) {
-                        alert('Please Enter Valid User Name & Password');
+                        $scope.errorMsg = 'Please Enter Valid User Name & Password';
+                        $scope.warningFlag = true;
                         $scope.user.username = "";
                         $scope.user.password = "";
+                        clearFlag();
+
                     }
                 }
 
             }
         } else {
-            alert('Please enter User Name & Password');
+            $scope.errorMsg = 'Please enter User Name & Password';
+            $scope.warningFlag = true;
+            clearFlag();
         }
     }
+
+    clearFlag = function() {
+        $timeout(function() {
+            $scope.warningFlag = false;
+        }, 3000);
+    }
+
 }]);
