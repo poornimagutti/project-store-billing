@@ -1,7 +1,7 @@
-appStore.controller('loginController', ['$scope', '$rootScope', '$location', '$timeout', function($scope, $rootScope, $location, $timeout) {
+appStore.controller('loginController', ['$scope', '$rootScope', '$location', '$timeout', 'dataService', function($scope, $rootScope, $location, $timeout, dataService) {
 
     $scope.warningFlag = false;
-    $scope.users = [{ username: 'sai', password: 'test@123' }, { username: 'kiran', password: 'test@123' }, { username: 'venkat', password: 'test@123' }];
+    $scope.users = dataService.usersList();
 
     $scope.login = function(user) {
 
@@ -19,10 +19,8 @@ appStore.controller('loginController', ['$scope', '$rootScope', '$location', '$t
                         $scope.user.username = "";
                         $scope.user.password = "";
                         clearFlag();
-
                     }
                 }
-
             }
         } else {
             $scope.errorMsg = 'Please enter User Name & Password';
