@@ -4,6 +4,7 @@ appStore.controller('productController', ['$scope', 'dataService', function($sco
 
     $scope.purchaselist = [];
 
+    /* getting a product */
     $scope.getItem = function(pcode) {
 
         for (var i = 0; i < $scope.productList.length; i++) {
@@ -21,6 +22,7 @@ appStore.controller('productController', ['$scope', 'dataService', function($sco
 
     $scope.itemIndex = null;
 
+    /* Adding a product */
     $scope.addProduct = function() {
 
 
@@ -52,6 +54,7 @@ appStore.controller('productController', ['$scope', 'dataService', function($sco
         $scope.productUnits = "";
     }
 
+    /* Edit a product */
     $scope.editProduct = function(itemNo, product) {
         $scope.productCode = product.product_code;
         $scope.productName = product.product_name;
@@ -61,13 +64,13 @@ appStore.controller('productController', ['$scope', 'dataService', function($sco
 
     }
 
+    /* Remove a product */
     $scope.removeProduct = function(item) {
         $scope.purchaselist.splice(item, 1);
     }
 
+    /* generation of bill */
     $scope.generateBill = function() {
-
-        // Calculate of total items cost and bill generation 
         var totalAmount = 0;
         for (var i = 0; i < $scope.purchaselist.length; i++) {
             totalAmount = totalAmount + $scope.purchaselist[i].product_totalcost;
